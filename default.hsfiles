@@ -83,9 +83,9 @@ main = defaultMain
 {-# OPTIONS_GHC -F -pgmF hspec-discover #-}
 
 {-# START_FILE test/SpecHook.hs #-}
-module SpecHook where
+module SpecHook (hook) where
 
-import Test.Hspec
+import Test.Hspec (Spec, parallel)
 
 hook :: Spec -> Spec
 hook = parallel
@@ -93,9 +93,9 @@ hook = parallel
 {-# START_FILE test/LibSpec.hs #-}
 module LibSpec (spec) where
 
-import Lib
-import Test.Hspec
-import Test.QuickCheck
+import Lib             (someFunc)
+import Test.Hspec      (Spec, it, shouldReturn)
+import Test.QuickCheck ()
 
 spec :: Spec
 spec = it "returns successfully" $ do
@@ -112,7 +112,7 @@ someFunc = putStrLn "someFunc"
 {-# START_FILE app/Main.hs #-}
 module Main (main) where
 
-import Lib
+import Lib (someFunc)
 
 main :: IO ()
 main = someFunc
