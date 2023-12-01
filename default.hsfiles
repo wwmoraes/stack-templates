@@ -33,9 +33,6 @@ ghc-options:
 - -Wmissing-home-modules
 - -Wpartial-fields
 - -Wredundant-constraints
-- -threaded
-- -rtsopts
-- -with-rtsopts=-N
 
 build-tools: hspec-discover
 
@@ -49,7 +46,7 @@ _with-path: &_with-path
   - condition: true
     other-modules: Paths_{{name}}_resources
 
-_common: &_common
+_bin: &_bin
   ghc-options:
   - -threaded
   - -rtsopts
@@ -61,7 +58,7 @@ library:
 
 executables:
   {{name}}-bin:
-    <<: [*_common, *_without-path]
+    <<: [*_bin, *_without-path]
     main:                Main.hs
     source-dirs:         app
     dependencies:
@@ -69,7 +66,7 @@ executables:
 
 tests:
   {{name}}-test:
-    <<: [*_common, *_with-path]
+    <<:  *_with-path
     main:                Spec.hs
     source-dirs:         test
     dependencies:
