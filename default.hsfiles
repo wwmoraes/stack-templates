@@ -42,12 +42,12 @@ build-tools: hspec-discover
 _without-path: &_without-path
   when:
   - condition: false
-    other-modules: Paths_cis1940_resources
+    other-modules: Paths_{{name}}_resources
 
 _with-path: &_with-path
   when:
   - condition: true
-    other-modules: Paths_cis1940_resources
+    other-modules: Paths_{{name}}_resources
 
 _common: &_common
   ghc-options:
